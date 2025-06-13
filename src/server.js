@@ -11,7 +11,6 @@ const port = 3000;
 app.use(cors());
 app.use(express.json());
 
-// GET - Todos los alumnos
 app.get('/api/alumnos', async (req, res) => {
   const client = new Client(config);
   try {
@@ -25,7 +24,6 @@ app.get('/api/alumnos', async (req, res) => {
   }
 });
 
-// GET - Alumno por ID
 app.get('/api/alumnos/:id', async (req, res) => {
   const { id } = req.params;
   if (isNaN(id)) return res.status(StatusCodes.BAD_REQUEST).send("El ID debe ser numérico");
@@ -43,7 +41,6 @@ app.get('/api/alumnos/:id', async (req, res) => {
   }
 });
 
-// POST - Crear alumno
 app.post('/api/alumnos', async (req, res) => {
   const { nombre, apellido, id_curso, fecha_nacimiento, hace_deportes } = req.body;
   if (!nombre || nombre.length < 3) return res.status(StatusCodes.BAD_REQUEST).send("Nombre inválido");
@@ -65,7 +62,6 @@ app.post('/api/alumnos', async (req, res) => {
   }
 });
 
-// PUT - Actualizar alumno
 app.put('/api/alumnos', async (req, res) => {
   const { id, nombre, apellido, id_curso, fecha_nacimiento, hace_deportes } = req.body;
   if (!id) return res.status(StatusCodes.BAD_REQUEST).send("Falta el ID");
@@ -85,7 +81,6 @@ app.put('/api/alumnos', async (req, res) => {
   }
 });
 
-// DELETE - Eliminar alumno
 app.delete('/api/alumnos/:id', async (req, res) => {
   const { id } = req.params;
   const client = new Client(config);
